@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Directory</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Template</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="#">Add a Listing</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="text-center">
+        <h1 class="display-4">Stay like a local</h1>
+        <p class="lead">The best holiday experience</p>
+        <div class="search-bar mt-4 d-inline-flex">
+            <input type="text" class="form-control me-2" placeholder="What are you searching for?">
+            <input type="text" class="form-control me-2" placeholder="Location">
+            <input type="text" class="form-control me-2" placeholder="Categories">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class="info-section">
+    <h2>One-of-a-kind vacation rentals</h2>
+    <p class="lead">Booking with us is easy</p>
+    <div>
+        <span class="badge badge-primary">Bootstrap 5</span>
+        <span class="badge badge-secondary">React</span>
+    </div>
+</div>
+
+
+{% endblock content %}
+{% block javascripts %}
+{% endblock javascripts %}
