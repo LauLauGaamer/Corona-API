@@ -26,14 +26,29 @@ html, body {
     justify-content: center;
     color: black;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 1;
 }
 
-.hero h1 {
-    font-size: 3.5rem; /* Größere Schriftgröße */
-    font-weight: 700; /* Fett */
-    color: #f0f0f0; /* Helles Grau */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Schlagschatten */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Dunkleres Overlay hinter der Überschrift */
+    z-index: -1; /* Overlay hinter den Text legen */
 }
+
+h1.display-4 {
+    font-size: 4rem; /* Vergrößert die Schriftgröße */
+    color: #ffffff; /* Beibehaltung von Weiß für die Schrift */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Schlagschatten für bessere Lesbarkeit */
+    font-weight: bold; /* Stellt sicher, dass die Schrift fett ist */
+}
+
+
 
 .hero p.lead {
     font-size: 1.5rem; /* Größere Schriftgröße für den Lead-Text */
@@ -47,6 +62,27 @@ html, body {
     border-radius: 30px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
+
+.input-group {
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter schwarzer Hintergrund */
+    border-radius: 30px; /* Abgerundete Ecken */
+    padding: 10px; /* Breitere Umrandung */
+    max-width: 600px; /* Feste maximale Breite für das Eingabefeld */
+    margin: auto; /* Zentriert den Input */
+}
+
+.input-group .form-control {
+    border: none; /* Entfernt den Rand des Eingabefelds */
+    background-color: rgba(255, 255, 255, 0.9); /* Leicht transparentes Weiß für das Input-Feld */
+    color: #000000; /* Schwarzer Text für bessere Lesbarkeit */
+    border-radius: 30px; /* Runde Ecken des Eingabefeldes */
+}
+
+.input-group .btn-primary {
+    border-radius: 0 30px 30px 0; /* Nur die rechte Seite des Buttons abrunden */
+    margin-left: 5px; /* Abstand zum Input-Feld */
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     color: #f0f0f0; /* Dunkles Grau */

@@ -28,7 +28,10 @@
 }
 
 
-footer {
-    background-color: #16253b;
-    color: #f0f0f0;
+footer.info-section {
+    filter: none !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+    padding: 20px 0;
+    z-index: 2; /* Sicherstellen, dass der Footer über allen anderen Elementen liegt */
 }
