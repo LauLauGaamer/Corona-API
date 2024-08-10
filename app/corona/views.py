@@ -10,7 +10,7 @@ def index(request):
 
 def home(request):
     context = {}
-    return render(request, "home.html", context)
+    return render(request, "pages/home.html", context)
 
 def init_database(request):
     # Muss noch vervollständigt werden!

@@ -1,8 +1,5 @@
-{% extends "base.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
+{% load static %}
+<link href="{% static 'css/navbar.css' %}" rel="stylesheet">
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
@@ -31,30 +28,3 @@
         </div>
     </div>
 </nav>
-
-<div class="hero">
-    <div class="text-center">
-        <h1 class="display-4">Stay like a local</h1>
-        <p class="lead">The best holiday experience</p>
-        <div class="search-bar mt-4 d-inline-flex">
-            <input type="text" class="form-control me-2" placeholder="What are you searching for?">
-            <input type="text" class="form-control me-2" placeholder="Location">
-            <input type="text" class="form-control me-2" placeholder="Categories">
-            <button class="btn btn-primary">Search</button>
-        </div>
-    </div>
-</div>
-
-<div class="info-section">
-    <h2>One-of-a-kind vacation rentals</h2>
-    <p class="lead">Booking with us is easy</p>
-    <div>
-        <span class="badge badge-primary">Bootstrap 5</span>
-        <span class="badge badge-secondary">React</span>
-    </div>
-</div>
-
-
-{% endblock content %}
-{% block javascripts %}
-{% endblock javascripts %}

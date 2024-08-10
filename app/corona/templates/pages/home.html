@@ -1,0 +1,26 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="hero">
+    {% block navbar %}
+      {% include "includes/navbar.html" %}
+    {% endblock %}
+    <div class="text-center">
+        <h1 class="display-4">Stay like a local</h1>
+        <p class="lead">The best holiday experience</p>
+        <div class="search-bar mt-4 d-inline-flex">
+            <input type="text" class="form-control me-2" placeholder="What are you searching for?">
+            <input type="text" class="form-control me-2" placeholder="Location">
+            <input type="text" class="form-control me-2" placeholder="Categories">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+{% block javascripts %}
+{% endblock javascripts %}

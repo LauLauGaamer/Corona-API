@@ -2,13 +2,25 @@ body {
     background-color: #1e3a5f; /* Helles Beige */
     color: #f0f0f0; /* Dunkles Grau für Text */
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.content {
+    flex: 1; /* Dies sorgt dafür, dass der Inhalt den restlichen verfügbaren Raum einnimmt */
 }
 
 .hero {
     background-image: url('../images/background3.webp');
     background-size: cover;
     background-position: center;
-    height: 75vh;
+    height: 92vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,49 +42,10 @@ body {
 }
 
 .search-bar {
-    background-color: rgba(30, 58, 95, 0.85);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 15px;
     border-radius: 30px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-}
-
-.info-section {
-    text-align: center;
-    padding: 30px 0;
-    background-color: #ffffff; /* Weißer Hintergrund */
-    color: #333333;
-}
-
-.info-section .badge {
-    margin-top: 20px;
-}
-
-.info-section .badge-primary {
-    background-color: #4da6ff; /* Helles Blau für Badges */
-    color: #ffffff; /* Weißer Text */
-}
-
-.info-section .badge-secondary {
-    background-color: #ff9500; /* Warmes Orange für sekundäre Badges */
-    color: #ffffff; /* Weißer Text */
-}
-
-.navbar {
-    background-color: #16253b; /* Dunkles Blau */
-}
-
-.navbar .nav-link {
-    color: #f0f0f0; /* Weißer Text in der Navigation */
-}
-
-.navbar .btn-primary {
-    background-color: #3b82f6; /* Helles Blau für den Button */
-    border-color: #3b82f6;
-}
-
-.navbar .btn-primary:hover {
-    background-color: #60a5fa; /* Helleres Blau für Hover-Effekt */
-    border-color: #60a5fa;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -87,18 +60,4 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover {
     background-color: #60a5fa; /* Ein etwas dunkleres Blau für den Hover-Zustand */
     border-color: #60a5fa;
-}
-
-.badge-primary {
-    background-color: #3b82f6; /* Helles Blau */
-}
-
-.badge-secondary {
-    background-color: #60a5fa; /* Warmes Orange */
-}
-
-
-footer {
-    background-color: #16253b; /* Sehr dunkles Blau */
-    color: #f0f0f0; /* Heller Text im Footer */
 }
