@@ -1,7 +1,7 @@
 .info-section {
     padding: 20px 0;
-    background-color: #ffffff;
-    color: #333333;
+    background-color: #1e2122;
+    color: #FFFFFF;
 }
 
 .info-section .badge {
@@ -33,5 +33,5 @@ footer.info-section {
     backdrop-filter: none !important;
     text-shadow: none !important;
     padding: 20px 0;
-    z-index: 2; /* Sicherstellen, dass der Footer über allen anderen Elementen liegt */
+    z-index: 2;
 }

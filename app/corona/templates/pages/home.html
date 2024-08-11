@@ -4,6 +4,9 @@
 
 {% block content %}
 
+{% load static %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
 <div class="hero">
     {% block navbar %}
       {% include "includes/navbar.html" %}
