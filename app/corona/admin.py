@@ -4,4 +4,3 @@ from .models import *
 # Register your models here.
 admin.site.register(States)
 admin.site.register(Districts)
-admin.site.register(County)

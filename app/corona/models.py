@@ -6,13 +6,14 @@ class States(models.Model):
         name = models.CharField(max_length=200)
         abbreviation = models.CharField(max_length=5)
 
-class County(models.Model):
-        id = models.AutoField(primary_key=True)
-        name = models.CharField(max_length=200)
-        state = models.ForeignKey(States, on_delete=models.PROTECT)
-
 class Districts(models.Model):
         id = models.IntegerField(primary_key=True)
         state = models.ForeignKey(States, on_delete=models.PROTECT)
-        county = models.ForeignKey(County, on_delete=models.PROTECT)
+        county = models.CharField(max_length=200)
         name = models.CharField(max_length=200)
+
+class Towns(models.Model):
+        name = models.CharField(max_length=200)
+        plz = models.CharField(max_length=10)
+        districts = models.ForeignKey(Districts, on_delete=models.PROTECT)
+        states = models.ForeignKey(States, on_delete=models.PROTECT)
