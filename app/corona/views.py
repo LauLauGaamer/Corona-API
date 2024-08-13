@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
-from django.db.models import Q
 
-from corona.models import *
 from corona.helpers import sync_database
+from corona.services.db_service import search_for_location
 
 # Create your views here.
 
@@ -26,9 +25,7 @@ def sync_database_view(request):
 def live_search(request):
     query = request.GET.get('q', '').lower().strip()
     if query:
-        towns = Towns.objects.filter(Q(name__icontains=query) | Q(plz__icontains=query))[:5]
-        districts = Districts.objects.filter(name__icontains=query)[:5]
-        states = States.objects.filter(name__icontains=query)[:5]
+        states, districts, towns = search_for_location(query)
 
         results = {
             'towns': list(towns.values('name', 'plz')),

@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Tuple
 from ..dtos.location_dtos import *
 from ..models import *
+from django.db.models import Q
 
 def insert_all_states(states: List[StateDTO]):
     for stateDto in states:
@@ -25,3 +26,10 @@ def insert_all_towns(towns: List[TownDTO]):
 
         town = Towns(name = townDto.name, plz = townDto.plz, district = district, state = state)
         town.save()
+
+def search_for_location(query: str) -> Tuple[List[TownDTO], List[DistrictDTO], List[StateDTO]]:
+    towns = Towns.objects.filter(Q(name__icontains=query) | Q(plz__icontains=query))[:5]
+    districts = Districts.objects.filter(name__icontains=query)[:5]
+    states = States.objects.filter(name__icontains=query)[:5]
+    
+    return towns, districts, states
