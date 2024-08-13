@@ -19,5 +19,5 @@ class StateDTO:
 class TownDTO:
     name: str
     plz: str
-    districts: str
-    states: str
+    district: str
+    state: str

@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from .views import *
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", home_view, name="home"),
+    path("backend/sync-database", sync_database_view, name="sync_database"),
 ]

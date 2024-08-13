@@ -15,5 +15,5 @@ class Districts(models.Model):
 class Towns(models.Model):
         name = models.CharField(max_length=200)
         plz = models.CharField(max_length=10)
-        districts = models.ForeignKey(Districts, on_delete=models.PROTECT)
-        states = models.ForeignKey(States, on_delete=models.PROTECT)
+        district = models.ForeignKey(Districts, on_delete=models.PROTECT)
+        state = models.ForeignKey(States, on_delete=models.PROTECT)

@@ -1,6 +1,6 @@
-from app.dtos.location_dtos import *
+from ..dtos.location_dtos import *
 from typing import List
-from data_service import *
+from .data_service import *
 
 def get_all_districts() -> List[DistrictDTO]:
     datapoints = []
@@ -31,7 +31,7 @@ def get_all_towns() -> List[TownDTO]:
 
     for line in lines:
         line = line.strip().split(";")
-        town = TownDTO(name=line[1], plz=line[2], districts=line[4], states=line[3])
+        town = TownDTO(name=line[1].strip(), plz=line[2].strip(), district=line[4].strip(), state=line[3].strip())
         datapoints.append(town)
 
     return datapoints

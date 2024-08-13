@@ -2,6 +2,8 @@
 DD2 Project
 
 Investierte Zeit:
-    -> 10:30 - 11:45
+    1h
     +3h
     +1h
+    +1h
+    +2,5h

@@ -22,12 +22,14 @@ html, body {
     background-position: center;
     height: 90vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: black;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     position: relative;
     z-index: 1;
+    padding-top: 20px;
 }
 
 .hero::before {
@@ -67,6 +69,7 @@ h1.display-4 {
     padding: 10px;
     max-width: 600px;
     margin: auto;
+    position: relative;
 }
 
 .input-group .form-control {
@@ -100,3 +103,4 @@ h1.display-4 {
     background-color: #60a5fa;
     border-color: #60a5fa;
 }
+

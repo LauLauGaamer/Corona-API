@@ -1,28 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from corona.models import * 
-import requests
+from django.contrib import messages
+
+from corona.models import *
+from corona.helpers import sync_database
 
 # Create your views here.
 
 def index(request):
-        return HttpResponse("Hello, World. Das ist die Corona View")
+    return HttpResponse("Hello, World. Das ist die Corona View")
 
-def home(request):
-    context = {}
+def home_view(request):
+    context = {"sync_function": sync_database}
     return render(request, "pages/home.html", context)
 
-def init_database(request):
-    # Muss noch vervollständigt werden!
-    url = "https://api.corona-zahlen.org/states"
-    response = requests.get(url).json()
+def sync_database_view(request):
+    context = {}
+    messages.success(request, 'Synchronisierung erfolgreich abgeschlossen.')
+    
 
-    for state, data in response["data"].items():
-        new_state = States(id=data["id"], name=data["name"], abbreviation=state)
-        new_state.save() 
-
-    url = "https://api.corona-zahlen.org/districts"
-    response = requests.get(url).json()
-
-    for ags, data in response["data"].items():
-        new_county = County(name="county",)
+    sync_database()
+    return redirect("home")
