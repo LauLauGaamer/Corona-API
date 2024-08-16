@@ -32,4 +32,4 @@ def search_for_location(query: str) -> Tuple[List[TownDTO], List[DistrictDTO], L
     districts = Districts.objects.filter(name__icontains=query)[:5]
     states = States.objects.filter(name__icontains=query)[:5]
     
-    return towns, districts, states
+    return states, districts, towns
