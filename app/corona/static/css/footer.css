@@ -1,11 +1,9 @@
 .info-section {
-    padding: 20px 0;
     background-color: #1e2122;
     color: #FFFFFF;
 }
 
 .info-section .badge {
-    margin-top: 10px;
     margin-right: 5px;
 }
 
@@ -27,11 +25,16 @@
     background-color: #60a5fa;
 }
 
+.footer {
+    background-color: #1e2122;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
 
 footer.info-section {
     filter: none !important;
     backdrop-filter: none !important;
     text-shadow: none !important;
-    padding: 20px 0;
-    z-index: 2;
 }

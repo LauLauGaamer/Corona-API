@@ -26,7 +26,7 @@
     <div class="d-flex justify-content-center position-relative">
         <div class="input-group mt-4" style="max-width: 600px; width: 100%;">
             <input type="text" id="search-input" class="form-control" placeholder="Stadt / Landkreis / Bezirk / ..." style="text-align: center;">
-            <button class="btn btn-primary" type="button">Search</button>
+            <button class="btn btn-primary" id="search-button" type="button">Search</button>
         </div>
 
         <div id="search-results" class="dropdown-menu search-result" style="width: 100%; max-width: 600px; display: none; position: absolute; top: 100%; z-index: 1000; background-color: #1e2122; color: white;">
@@ -39,4 +39,5 @@
 
 {% block javascripts %}
 <script src="{% static 'js/live_search.js' %}"></script>
+<script src="{% static 'js/search_button.js' %}"></script>
 {% endblock javascripts %}
