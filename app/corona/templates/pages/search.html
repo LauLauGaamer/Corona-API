@@ -1,0 +1,20 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<link href="{% static 'css/search.css' %}" rel="stylesheet">
+
+{% block navbar %}
+    {% include "includes/navbar.html" %}
+{% endblock %}
+
+
+
+
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}
