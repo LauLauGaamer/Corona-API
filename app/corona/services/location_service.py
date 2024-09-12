@@ -1,4 +1,4 @@
-from ..dtos.location_dtos import *
+from ..objects.location_dtos import *
 from typing import List
 from .data_service import *
 

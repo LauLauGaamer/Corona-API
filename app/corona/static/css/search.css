@@ -1,0 +1,41 @@
+.custom-dropdown {
+    list-style-type: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.dropdown-item {
+    padding: 10px 35px;
+    margin: 3px 30px;
+    color: white;
+    background-color: #444;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #555;
+}
+
+.dropdown-error{
+    color: white;
+    text-align: center;
+}
+
+.dropdown-error .btn-primary{
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.search-title {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
