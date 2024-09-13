@@ -1,12 +1,11 @@
 from ..objects.location_dtos import *
 from ..objects.exceptions import TooManyResultsError
+from ..objects.enums import LocationTypeEnum
 from ..models import *
 from .data_service import *
-from .db_service import filter_all_tables
+from .db_service import filter_all_tables, get_district, get_state, get_town
 
 from typing import List, Tuple
-
-
 
 def get_all_districts() -> List[DistrictDTO]:
     datapoints = []
@@ -58,3 +57,22 @@ def search_for_location(query: str, max_results: int = 10) -> Tuple[List[TownDTO
         raise TooManyResultsError(results = results, max_results = max_results, results_length = results_length)
 
     return states, districts, towns
+
+def get_location(type:LocationTypeEnum, query:str = None) -> TownDTO | DistrictDTO | StateDTO:
+    match type:
+        case LocationTypeEnum.TOWN:
+            try:
+                location = get_town(id=int(query))
+            except ValueError:
+                raise ValueError("Der angegebene Parameter 'id' kann nicht zur id umgewandelt werden (Town)!")
+        case LocationTypeEnum.DISTRICT:
+            try:
+                location = get_district(id=int(query))
+            except ValueError:
+                raise ValueError("Der angegebene Parameter 'id' kann nicht zur id umgewandelt werden (District)!")
+        case LocationTypeEnum.STATE:
+            location = get_state(abbreviation=query)
+        case _:
+            raise ValueError("Der angegebene type stimmt nicht mit dem LocationTypeEnum überein! (Optionen: 'TOWN', 'DISTRICT', 'STATE')")
+
+    return location

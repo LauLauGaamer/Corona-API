@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from .enums import LocationTypeEnum
 
 @dataclass
 class DistrictDTO:
@@ -6,7 +7,7 @@ class DistrictDTO:
     state: str 
     county: str
     name: str
-    type: str = "Landkreis"
+    type: str = LocationTypeEnum.DISTRICT
 
 
 @dataclass
@@ -14,7 +15,7 @@ class StateDTO:
     id: int
     name: str
     abbreviation: str
-    type: str = "Bundesland"
+    type: str = LocationTypeEnum.STATE
 
 
 @dataclass
@@ -23,4 +24,4 @@ class TownDTO:
     plz: str
     district: str
     state: str
-    type: str = "Stadt"
+    type: str = LocationTypeEnum.TOWN

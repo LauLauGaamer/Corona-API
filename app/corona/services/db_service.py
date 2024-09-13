@@ -1,13 +1,25 @@
-from typing import List
+from typing import List, Tuple
 from django.db.models import Q
 
 from ..objects.location_dtos import *
+from ..objects.exceptions import MissingParameterError
 from ..models import *
 
 def insert_all_states(states: List[StateDTO]):
     for stateDto in states:
         state = States(id = stateDto.id, name = stateDto.name, abbreviation = stateDto.abbreviation)
         state.save()
+
+def get_state(id:int = None, abbreviation:str = None) -> StateDTO:
+    if id is not None:
+        state = States.objects.get(id = id)
+    elif abbreviation is not None:
+        state = States.objects.get(abbreviation__iexact=abbreviation)
+    else:
+        MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (State) zu machen.")
+
+    return StateDTO(id = state.id, name = state.name, abbreviation = state.abbreviation)
+    
 
 def insert_all_disctricts(districts: List[DistrictDTO]):
     for districtDto in districts:
@@ -16,6 +28,16 @@ def insert_all_disctricts(districts: List[DistrictDTO]):
 
             district = Districts(id = districtDto.district_id, state = state, county = districtDto.county, name = districtDto.name)
             district.save()
+
+def get_district(id:int = None, name:str = None) -> DistrictDTO:
+    if id is not None:
+        district = Districts.objects.get(id = id)
+    elif name is not None:
+        district = Districts.objects.get(name__iexact=name)
+    else:
+        MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (District) zu machen.")
+
+    return DistrictDTO(district_id = district.id, name = district.name, county = district.county, state = district.state)
 
 def insert_all_towns(towns: List[TownDTO]):
     for townDto in towns:
@@ -28,7 +50,17 @@ def insert_all_towns(towns: List[TownDTO]):
         town = Towns(name = townDto.name, plz = townDto.plz, district = district, state = state)
         town.save()
 
-def filter_all_tables(name: str):
+def get_town(id:int = None, name:str = None) -> TownDTO:
+    if id is not None:
+        town = Towns.objects.get(id = id)
+    elif name is not None:
+        town = Towns.objects.get(name__iexact=name)
+    else:
+        MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (Town) zu machen.")
+
+    return TownDTO(plz = town.plz, name = town.name, district = town.district, state = town.state)
+
+def filter_all_tables(name: str) -> Tuple[List[TownDTO], List[DistrictDTO], List[StateDTO]]:
     towns = Towns.objects.filter(Q(name__icontains=name) | Q(plz__icontains=name)).all()
     districts = Districts.objects.filter(name__icontains=name).all()
     states = States.objects.filter(name__icontains=name).all()

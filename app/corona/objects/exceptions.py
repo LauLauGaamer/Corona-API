@@ -9,3 +9,6 @@ class TooManyResultsError(Exception):
 
     def __str__(self):
         return f"Die Suche hat zu viele Ergebnisse geliefert. Maximal Erlaubt sind: {self.max_results} (Deine Ergebnisse: {self.results_length})"
+    
+class MissingParameterError(Exception):
+    pass

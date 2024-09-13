@@ -5,8 +5,9 @@ from django.contrib import messages
 from dataclasses import asdict
 
 from corona.helpers import sync_database
-from corona.services.location_service import search_for_location
+from corona.services.location_service import search_for_location, get_location
 from corona.objects.exceptions import TooManyResultsError
+from corona.objects.enums import LocationTypeEnum
 
 # Create your views here.
 
@@ -47,9 +48,15 @@ def search_view(request):
 
 def details_view(request, name):
     type = request.GET.get("type", "").lower().strip()
+
+    try:
+        typeEnum = LocationTypeEnum.from_string(type)
+    except ValueError as e:
+        return JsonResponse({"error": str(e)}, status=400)
+    
     # get Database entry
-
-
+    locationObj = get_location(typeEnum, query=name)
+    print(locationObj)
     # get Data from API
 
     # convert all Data
