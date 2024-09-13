@@ -12,3 +12,6 @@ class TooManyResultsError(Exception):
     
 class MissingParameterError(Exception):
     pass
+
+class MissingDatabaseEntry(Exception):
+    pass

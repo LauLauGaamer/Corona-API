@@ -64,15 +64,15 @@ def get_location(type:LocationTypeEnum, query:str = None) -> TownDTO | DistrictD
             try:
                 location = get_town(id=int(query))
             except ValueError:
-                raise ValueError("Der angegebene Parameter 'id' kann nicht zur id umgewandelt werden (Town)!")
+                raise ValueError(f'Der angegebene Parameter "id"({query}) kann nicht zur id umgewandelt werden (Town)!')
         case LocationTypeEnum.DISTRICT:
             try:
                 location = get_district(id=int(query))
             except ValueError:
-                raise ValueError("Der angegebene Parameter 'id' kann nicht zur id umgewandelt werden (District)!")
+                raise ValueError(f'Der angegebene Parameter "id"({query}) kann nicht zur id umgewandelt werden (District)!')
         case LocationTypeEnum.STATE:
             location = get_state(abbreviation=query)
         case _:
-            raise ValueError("Der angegebene type stimmt nicht mit dem LocationTypeEnum überein! (Optionen: 'TOWN', 'DISTRICT', 'STATE')")
+            raise ValueError('Der angegebene type stimmt nicht mit dem LocationTypeEnum überein! (Optionen: "TOWN", "DISTRICT", "STATE")')
 
     return location

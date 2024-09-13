@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 
-from dataclasses import asdict
-
 from corona.helpers import sync_database
 from corona.services.location_service import search_for_location, get_location
 from corona.objects.exceptions import TooManyResultsError
@@ -82,14 +80,14 @@ def live_search(request):
             states, districts, towns = search_for_location(query, max_results=10)
 
             results = {
-                "towns": [asdict(town) for town in towns],
-                "districts": [asdict(district) for district in districts],
-                "states": [asdict(state) for state in states],
+                "towns": [town.to_dict() for town in towns],
+                "districts": [district.to_dict() for district in districts],
+                "states": [state.to_dict() for state in states],
                 "querySucceeded": True,
             }
 
         except TooManyResultsError as e:
-            results = {"towns": [asdict(x) for x in e.results["towns"][:3]], "districts":  [asdict(x) for x in e.results["districts"][:3]], "states":  [asdict(x) for x in e.results["states"][:3]], "querySucceeded": False,}
+            results = {"towns": [x.to_dict() for x in e.results["towns"][:3]], "districts":  [x.to_dict() for x in e.results["districts"][:3]], "states":  [x.to_dict() for x in e.results["states"][:3]], "querySucceeded": False,}
     else:
         results = {"towns": [], "districts": [], "states": [], "querySucceeded": True}
 

@@ -2,7 +2,7 @@ from typing import List, Tuple
 from django.db.models import Q
 
 from ..objects.location_dtos import *
-from ..objects.exceptions import MissingParameterError
+from ..objects.exceptions import MissingParameterError, MissingDatabaseEntry
 from ..models import *
 
 def insert_all_states(states: List[StateDTO]):
@@ -12,9 +12,15 @@ def insert_all_states(states: List[StateDTO]):
 
 def get_state(id:int = None, abbreviation:str = None) -> StateDTO:
     if id is not None:
-        state = States.objects.get(id = id)
+        try:
+            state = States.objects.get(id = id)
+        except:
+            raise MissingDatabaseEntry(f'{id} existiert in States nicht.')
     elif abbreviation is not None:
-        state = States.objects.get(abbreviation__iexact=abbreviation)
+        try:
+            state = States.objects.get(abbreviation__iexact=abbreviation)
+        except:
+            raise MissingDatabaseEntry(f'{abbreviation} existiert in States nicht.')
     else:
         MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (State) zu machen.")
 
@@ -31,9 +37,15 @@ def insert_all_disctricts(districts: List[DistrictDTO]):
 
 def get_district(id:int = None, name:str = None) -> DistrictDTO:
     if id is not None:
-        district = Districts.objects.get(id = id)
+        try:
+            district = Districts.objects.get(id = id)
+        except:
+            raise MissingDatabaseEntry(f'{id} existiert in Districts nicht.')
     elif name is not None:
-        district = Districts.objects.get(name__iexact=name)
+        try:
+            district = Districts.objects.get(name__iexact=name)
+        except:
+            raise MissingDatabaseEntry(f'{name} existiert in Districts nicht.')
     else:
         MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (District) zu machen.")
 
@@ -52,9 +64,15 @@ def insert_all_towns(towns: List[TownDTO]):
 
 def get_town(id:int = None, name:str = None) -> TownDTO:
     if id is not None:
-        town = Towns.objects.get(id = id)
+        try:
+            town = Towns.objects.get(id = id)
+        except:
+            raise MissingDatabaseEntry(f'{id} existiert in Towns nicht.')
     elif name is not None:
-        town = Towns.objects.get(name__iexact=name)
+        try:
+            town = Towns.objects.get(name__iexact=name)
+        except:
+            raise MissingDatabaseEntry(f'{name} existiert in Towns nicht.')
     else:
         MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (Town) zu machen.")
 

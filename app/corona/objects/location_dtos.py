@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
+
 from .enums import LocationTypeEnum
 
 @dataclass
@@ -7,16 +8,24 @@ class DistrictDTO:
     state: str 
     county: str
     name: str
-    type: str = LocationTypeEnum.DISTRICT
+    type: LocationTypeEnum = LocationTypeEnum.DISTRICT
 
+    def to_dict(self):
+        data = asdict(self)
+        data["type"] = str(self.type)
+        return data
 
 @dataclass
 class StateDTO:
     id: int
     name: str
     abbreviation: str
-    type: str = LocationTypeEnum.STATE
+    type: LocationTypeEnum = LocationTypeEnum.STATE
 
+    def to_dict(self):
+        data = asdict(self)
+        data["type"] = str(self.type)
+        return data
 
 @dataclass
 class TownDTO:
@@ -24,4 +33,9 @@ class TownDTO:
     plz: str
     district: str
     state: str
-    type: str = LocationTypeEnum.TOWN
+    type: LocationTypeEnum = LocationTypeEnum.TOWN
+
+    def to_dict(self):
+        data = asdict(self)
+        data["type"] = str(self.type)
+        return data
