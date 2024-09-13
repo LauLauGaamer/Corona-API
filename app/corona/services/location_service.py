@@ -1,6 +1,12 @@
 from ..objects.location_dtos import *
-from typing import List
+from ..objects.exceptions import TooManyResultsError
+from ..models import *
 from .data_service import *
+from .db_service import filter_all_tables
+
+from typing import List, Tuple
+
+
 
 def get_all_districts() -> List[DistrictDTO]:
     datapoints = []
@@ -35,3 +41,20 @@ def get_all_towns() -> List[TownDTO]:
         datapoints.append(town)
 
     return datapoints
+
+def search_for_location(query: str, max_results: int = 10) -> Tuple[List[TownDTO], List[DistrictDTO], List[StateDTO]]:
+    towns, districts, states = filter_all_tables(name = query)
+
+    # Check for length of results
+    results_length = len(towns) + len(districts) + len(states)
+
+    if results_length > max_results:
+        results = {
+            "towns": towns,
+            "districts": districts,
+            "states": states,
+        }
+        
+        raise TooManyResultsError(results = results, max_results = max_results, results_length = results_length)
+
+    return states, districts, towns

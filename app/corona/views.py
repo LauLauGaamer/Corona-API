@@ -5,7 +5,7 @@ from django.contrib import messages
 from dataclasses import asdict
 
 from corona.helpers import sync_database
-from corona.services.db_service import search_for_location
+from corona.services.location_service import search_for_location
 from corona.objects.exceptions import TooManyResultsError
 
 # Create your views here.
@@ -45,7 +45,15 @@ def search_view(request):
     context["navbarSearch"] = True
     return render(request, "pages/search.html", context)
 
-def details_view(request, name=None):
+def details_view(request, name):
+    type = request.GET.get("type", "").lower().strip()
+    # get Database entry
+
+
+    # get Data from API
+
+    # convert all Data
+
     context = {
         "navbarSearch": True,
     }
@@ -79,3 +87,6 @@ def live_search(request):
         results = {"towns": [], "districts": [], "states": [], "querySucceeded": True}
 
     return JsonResponse(results)
+
+    def get_redirect_for_details(request):
+        pass
