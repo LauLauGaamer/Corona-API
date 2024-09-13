@@ -15,9 +15,17 @@
     <h2 class="search-title">Suchergebnis für: {{ query }}</h2>
     {% if querySucceeded %}
         {% for item in results %}
-        <li class="dropdown-item">{{ item.name }} - {{ item.plz }}</li>
+            {% if item.type == "Stadt" %}
+                <li class="dropdown-item">{{ item.name }} (PLZ: {{ item.plz }})</li>
+            {% else %}
+                <li class="dropdown-item">{{ item.name }} ({{ item.type }})</li>
+            {% endif %}
         {% empty %}
-        <li class="dropdown-item">Die Liste ist leer.</li>
+        <div class="dropdown-error">
+            Die Suche hat leider keine Ergebnisse<br>
+            geliefert, bitte probiere es erneut!<br>
+            <a class="btn btn-primary" href="{% url 'home' %}">zurück zur Homepage</a>  
+        </div>
         {% endfor %}
     {% else %}
         <div class="dropdown-error">
