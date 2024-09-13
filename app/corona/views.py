@@ -14,7 +14,10 @@ def index(request):
     return HttpResponse("Hello, World. Das ist die Corona View")
 
 def home_view(request):
-    context = {"sync_function": sync_database}
+    context = {
+        "sync_function": sync_database,
+        "navbarSearch": False,
+        }
     return render(request, "pages/home.html", context)
 
 def search_view(request):
@@ -39,10 +42,13 @@ def search_view(request):
             "results": [],
         }
 
+    context["navbarSearch"] = True
     return render(request, "pages/search.html", context)
 
 def details_view(request, name=None):
-    context = {}
+    context = {
+        "navbarSearch": True,
+    }
     return render(request, "pages/details.html", context)
 
 

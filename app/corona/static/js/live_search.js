@@ -2,8 +2,13 @@ function search(query){
     const resultsDiv = document.getElementById('search-results');
 
     if (query.length > 1) {
-        fetch(window.location.href + `backend/live-search/?q=${query}`)
-            .then(response => response.json())
+        fetch(`${window.location.origin}/corona/backend/live-search/?q=${query}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 resultsDiv.innerHTML = '';
 
@@ -35,7 +40,17 @@ function search(query){
                     if(!data.querySucceeded){
                         const div = document.createElement('div');
                         div.classList.add('dropdown-item');
+                        div.style.backgroundColor = "#1e2122";
                         div.textContent = "Weitere Ergebnisse ..";
+
+                        div.addEventListener('mouseover', function () {
+                            this.style.color = "white";
+                        });
+                    
+                        div.addEventListener('mouseout', function () {
+                            this.style.color = "white";
+                        });
+
                         resultsDiv.appendChild(div);
                     }
 
@@ -58,6 +73,6 @@ document.getElementById('search-input').addEventListener('input', function() {
 document.getElementById('search-input').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
-        window.location.href = window.location.href + 'search/?q=' + this.value; //geht noch nicht
+        window.location.href = `${window.location.origin}/corona/search/?q=${this.value}`;
     }
 });
