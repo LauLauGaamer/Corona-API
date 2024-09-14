@@ -17,7 +17,7 @@ function search(query){
                         const div = document.createElement('a');
                         div.classList.add('dropdown-item');
                         div.textContent = `${town.name} (PLZ: ${town.plz})`;
-                        div.setAttribute("href", 'http://127.0.0.1:8000/corona/search/?q=' + query)
+                        div.setAttribute("href", 'http://127.0.0.1:8000/corona/details/' + String(town.id) + "?type=" + town.type)
                         resultsDiv.appendChild(div);
                     });
 
@@ -25,7 +25,7 @@ function search(query){
                         const div = document.createElement('a');
                         div.classList.add('dropdown-item');
                         div.textContent = "Landkreis: " + district.name;
-                        div.setAttribute("href", 'http://127.0.0.1:8000/corona/search/?q=' + query)
+                        div.setAttribute("href", 'http://127.0.0.1:8000/corona/details/' + String(district.district_id) + "?type=" + district.type)
                         resultsDiv.appendChild(div);
                     });
 
@@ -33,7 +33,7 @@ function search(query){
                         const div = document.createElement('a');
                         div.classList.add('dropdown-item');
                         div.textContent = "Bundesland: " + state.name;
-                        div.setAttribute("href", 'http://127.0.0.1:8000/corona/search/?q=' + query)
+                        div.setAttribute("href", 'http://127.0.0.1:8000/corona/details/' + String(state.abbreviation) + "?type=" + state.type)
                         resultsDiv.appendChild(div);
                     });
 

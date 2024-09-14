@@ -76,7 +76,7 @@ def get_town(id:int = None, name:str = None) -> TownDTO:
     else:
         MissingParameterError("Mindestens einer der Parameter müssen gesetzt weden, um eine Datenbankabfrage (Town) zu machen.")
 
-    return TownDTO(plz = town.plz, name = town.name, district = town.district, state = town.state)
+    return TownDTO(id=town.id, plz = town.plz, name = town.name, district = town.district, state = town.state)
 
 def filter_all_tables(name: str) -> Tuple[List[TownDTO], List[DistrictDTO], List[StateDTO]]:
     towns = Towns.objects.filter(Q(name__icontains=name) | Q(plz__icontains=name)).all()
@@ -84,7 +84,7 @@ def filter_all_tables(name: str) -> Tuple[List[TownDTO], List[DistrictDTO], List
     states = States.objects.filter(name__icontains=name).all()
     
     # Convert into Lists of DTOs
-    towns = [TownDTO(x.name, x.plz, x.district.name, x.state.name) for x in towns]
+    towns = [TownDTO(x.id, x.name, x.plz, x.district.name, x.state.name) for x in towns]
     districts = [DistrictDTO(x.id, x.state.name, x.county, x.name) for x in districts]
     states = [StateDTO(x.id, x.name, x.abbreviation) for x in states]
 

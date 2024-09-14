@@ -29,6 +29,7 @@ class StateDTO:
 
 @dataclass
 class TownDTO:
+    id: int | None
     name: str
     plz: str
     district: str

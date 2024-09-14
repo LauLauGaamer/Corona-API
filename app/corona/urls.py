@@ -9,5 +9,6 @@ urlpatterns = [
 
     # Backend
     path("backend/sync-database", sync_database_view, name="sync_database"),
-    path("backend/live-search/", live_search, name="live-search")
+    path("backend/live-search/", live_search, name="live-search"),
+    # path("backend/find-redirect/", get_redirect_for_details, name="find-redirect"),
 ]

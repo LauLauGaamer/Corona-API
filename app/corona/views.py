@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
+from django.urls import reverse
 
 from corona.helpers import sync_database
 from corona.services.location_service import search_for_location, get_location
@@ -45,10 +46,10 @@ def search_view(request):
     return render(request, "pages/search.html", context)
 
 def details_view(request, name):
-    type = request.GET.get("type", "").lower().strip()
+    locationType = request.GET.get("type", "").lower().strip()
 
     try:
-        typeEnum = LocationTypeEnum.from_string(type)
+        typeEnum = LocationTypeEnum.from_string(locationType)
     except ValueError as e:
         return JsonResponse({"error": str(e)}, status=400)
     
@@ -92,6 +93,3 @@ def live_search(request):
         results = {"towns": [], "districts": [], "states": [], "querySucceeded": True}
 
     return JsonResponse(results)
-
-    def get_redirect_for_details(request):
-        pass

@@ -16,9 +16,11 @@
     {% if querySucceeded %}
         {% for item in results %}
             {% if item.type|lower == "stadt" %}
-                <li class="dropdown-item">{{ item.name }} (PLZ: {{ item.plz }})</li>
+                <a class="dropdown-item" href='{% url "details" item.id %}?type={{ item.type }}'>{{ item.name }} (PLZ: {{ item.plz }})</a>
+            {% elif item.type|lower == "landkreis" %}
+                <a class="dropdown-item" href='{% url "details" item.district_id %}?type={{ item.type }}'>{{ item.name }} ({{ item.type }})</a>
             {% else %}
-                <li class="dropdown-item">{{ item.name }} ({{ item.type }})</li>
+                <a class="dropdown-item" href='{% url "details" item.abbreviation %}?type={{ item.type }}'>{{ item.name }} ({{ item.type }})</a>
             {% endif %}
         {% empty %}
         <div class="dropdown-error">

@@ -36,7 +36,7 @@ def get_all_towns() -> List[TownDTO]:
 
     for line in lines:
         line = line.strip().split(";")
-        town = TownDTO(name=line[1].strip(), plz=line[2].strip(), district=line[4].strip(), state=line[3].strip())
+        town = TownDTO(id=None, name=line[1].strip(), plz=line[2].strip(), district=line[4].strip(), state=line[3].strip())
         datapoints.append(town)
 
     return datapoints
@@ -64,7 +64,10 @@ def get_location(type:LocationTypeEnum, query:str = None) -> TownDTO | DistrictD
             try:
                 location = get_town(id=int(query))
             except ValueError:
-                raise ValueError(f'Der angegebene Parameter "id"({query}) kann nicht zur id umgewandelt werden (Town)!')
+                try:
+                    location = get_town(name=query)
+                except:
+                    raise ValueError(f'Der angegebene Parameter "id"({query}) kann nicht zur id umgewandelt werden (Town)!')
         case LocationTypeEnum.DISTRICT:
             try:
                 location = get_district(id=int(query))
