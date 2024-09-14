@@ -15,7 +15,7 @@
     <h2 class="search-title">Suchergebnis für: {{ query }}</h2>
     {% if querySucceeded %}
         {% for item in results %}
-            {% if item.type == "Stadt" %}
+            {% if item.type|lower == "stadt" %}
                 <li class="dropdown-item">{{ item.name }} (PLZ: {{ item.plz }})</li>
             {% else %}
                 <li class="dropdown-item">{{ item.name }} ({{ item.type }})</li>

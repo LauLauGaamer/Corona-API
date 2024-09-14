@@ -1,9 +1,9 @@
 from enum import Enum
 
 class LocationTypeEnum(Enum):
-    TOWN = "Town"
-    DISTRICT = "District"
-    STATE = "State"
+    TOWN = "Stadt"
+    DISTRICT = "Landkreis"
+    STATE = "Bundesland"
 
     def __str__(self):
         return self.value

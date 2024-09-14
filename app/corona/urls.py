@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    #Main Pages
+    # Frontend
     path("", home_view, name="home"),
     path("search/", search_view, name="search"),
     path("details/<str:name>", details_view, name="details"),
