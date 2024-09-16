@@ -13,7 +13,7 @@ def get_all_districts() -> List[DistrictDTO]:
     request_data = request_api("https://api.corona-zahlen.org/districts")
 
     for id, data in request_data["data"].items():
-        district = DistrictDTO(district_id=id, state=data["state"], county=data["county"], name=data["name"])
+        district = DistrictDTO(id=id, state=data["state"], county=data["county"], name=data["name"])
         datapoints.append(district)
 
     return datapoints
@@ -24,7 +24,7 @@ def get_all_states() -> List[StateDTO]:
     request_data = request_api("https://api.corona-zahlen.org/states")
 
     for abbreviation, data in request_data["data"].items():
-        state = StateDTO(id=data["id"], name=data["name"], abbreviation=abbreviation)
+        state = StateDTO(name=data["name"], abbreviation=abbreviation)
         datapoints.append(state)
 
     return datapoints
@@ -36,7 +36,7 @@ def get_all_towns() -> List[TownDTO]:
 
     for line in lines:
         line = line.strip().split(";")
-        town = TownDTO(id=None, name=line[1].strip(), plz=line[2].strip(), district=line[4].strip(), state=line[3].strip())
+        town = TownDTO(name=line[1].strip(), plz=line[2].strip(), district=line[4].strip(), state=line[3].strip())
         datapoints.append(town)
 
     return datapoints
@@ -64,10 +64,7 @@ def get_location(type:LocationTypeEnum, query:str = None) -> TownDTO | DistrictD
             try:
                 location = get_town(id=int(query))
             except ValueError:
-                try:
-                    location = get_town(name=query)
-                except:
-                    raise ValueError(f'Der angegebene Parameter "id"({query}) kann nicht zur id umgewandelt werden (Town)!')
+                raise ValueError(f'Der angegebene Parameter "id"({query}) kann nicht zur id umgewandelt werden (Town)!')
         case LocationTypeEnum.DISTRICT:
             try:
                 location = get_district(id=int(query))

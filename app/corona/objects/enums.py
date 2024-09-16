@@ -18,3 +18,12 @@ class LocationTypeEnum(Enum):
                 return name
             
         raise ValueError(f'{string_value} ist kein Gültiger Wert für LocationTypeEnum!')
+    
+    def api_str(self):
+        match self:
+            case LocationTypeEnum.TOWN:
+                return "districts"
+            case LocationTypeEnum.DISTRICT:
+                return "districts"
+            case LocationTypeEnum.STATE:
+                return "states"

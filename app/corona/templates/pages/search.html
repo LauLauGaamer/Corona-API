@@ -18,7 +18,7 @@
             {% if item.type|lower == "stadt" %}
                 <a class="dropdown-item" href='{% url "details" item.id %}?type={{ item.type }}'>{{ item.name }} (PLZ: {{ item.plz }})</a>
             {% elif item.type|lower == "landkreis" %}
-                <a class="dropdown-item" href='{% url "details" item.district_id %}?type={{ item.type }}'>{{ item.name }} ({{ item.type }})</a>
+                <a class="dropdown-item" href='{% url "details" item.id %}?type={{ item.type }}'>{{ item.name }} ({{ item.type }})</a>
             {% else %}
                 <a class="dropdown-item" href='{% url "details" item.abbreviation %}?type={{ item.type }}'>{{ item.name }} ({{ item.type }})</a>
             {% endif %}
