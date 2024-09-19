@@ -3,10 +3,14 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.urls import reverse
 
+from datetime import timedelta, datetime
+
 from corona.helpers import sync_database
 from corona.services.location_service import search_for_location, get_location
+from corona.services.data_service import get_location_datapoints
 from corona.objects.exceptions import TooManyResultsError
 from corona.objects.enums import LocationTypeEnum
+
 
 # Create your views here.
 
@@ -55,13 +59,17 @@ def details_view(request, name):
     
     # get Database entry
     locationObj = get_location(typeEnum, query=name)
-    print(locationObj)
-    # get Data from API
+    
+    # Datum aus Frontend holen und ANPASSEN!
+    startday = datetime.now().date() - timedelta(days=20)
+    days = 14
 
-    # convert all Data
+    # get Data from API
+    data = get_location_datapoints(location=locationObj, days=days, startDay=startday)
 
     context = {
         "navbarSearch": True,
+        "data": data,
     }
     return render(request, "pages/details.html", context)
 

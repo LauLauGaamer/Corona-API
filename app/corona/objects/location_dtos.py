@@ -1,6 +1,6 @@
 from dataclasses import dataclass, asdict
-from datetime import date
-from typing import Optional
+from typing import Optional, Dict
+import datetime
 
 from .enums import LocationTypeEnum
 
@@ -9,6 +9,7 @@ class LocationDTO:
     name: str
     id: int | str | None
     type: LocationTypeEnum
+    api_id: str
 
     def to_dict(self):
         data = asdict(self)
@@ -17,7 +18,7 @@ class LocationDTO:
         return data
     
     def get_api_url(self):
-        return f'https://api.corona-zahlen.org/{self.type.api_str()}/{self.id}/history/cases/'
+        return f'https://api.corona-zahlen.org/{self.type.api_str()}/{self.api_id}/history/'
 
 
 @dataclass
@@ -26,7 +27,7 @@ class DistrictDTO(LocationDTO):
     county: str
     
     def __init__(self, name, id, state, county):
-        super().__init__(name=name, id=id, type=LocationTypeEnum.DISTRICT)
+        super().__init__(name=name, id=id, type=LocationTypeEnum.DISTRICT, api_id = id)
         self.state = state
         self.county = county
 
@@ -36,8 +37,9 @@ class StateDTO(LocationDTO):
     abbreviation: str
 
     def __init__(self, name, abbreviation):
-        super().__init__(name=name, id=abbreviation, type=LocationTypeEnum.STATE)
+        super().__init__(name=name, id=abbreviation, type=LocationTypeEnum.STATE, api_id = abbreviation)
         self.abbreviation = abbreviation
+
 
 @dataclass
 class TownDTO(LocationDTO):
@@ -46,19 +48,20 @@ class TownDTO(LocationDTO):
     state: str
 
     def __init__(self, name, plz, district, state):
-        super().__init__(name=name, id=plz, type=LocationTypeEnum.TOWN)
+        super().__init__(name=name, id=plz, type=LocationTypeEnum.TOWN, api_id = district)
         self.plz = plz
         self.district = district
         self.state = state
     
 
 @dataclass
-class DatapointDTO:
+class DatapointsDTO:
     endpoint_id: int | str
     endpoint_name: str
-    date: date
-    cases: int | None
-    incidence: float | None
-    deaths: int | None
-    recovered: int | None
+    start_date: datetime.date
+    end_date: datetime.date
+    cases: Dict[datetime.date, int | None]
+    incidence: Dict[datetime.date, float | None]
+    deaths: Dict[datetime.date, int | None]
+    recovered: Dict[datetime.date, int | None]
     # evt. Age Group / Männer Frauen etc.

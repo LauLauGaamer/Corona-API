@@ -27,3 +27,12 @@ class LocationTypeEnum(Enum):
                 return "districts"
             case LocationTypeEnum.STATE:
                 return "states"
+            
+class APIDataTypeEnum(Enum):
+    CASES = "cases"
+    DEATHS = "deaths"
+    INCIDENCE = "incidence"
+    RECOVERED = "recovered"
+
+    def __str__(self) -> str:
+        return self.value
