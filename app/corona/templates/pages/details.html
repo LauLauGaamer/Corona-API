@@ -11,6 +11,9 @@
     {% include "includes/navbar.html" %}
 {% endblock %}
 
+<h2 style="color: white;">{{ location.name }}</h2>
+
+<script id="data-json" type="application/json">{{ data|safe }}</script>
 <div class="container my-5">
     <div class="row">
       <div class="col-lg-9">

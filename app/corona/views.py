@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.urls import reverse
 
 from datetime import timedelta, datetime
+import json
 
 from corona.helpers import sync_database
 from corona.services.location_service import search_for_location, get_location
@@ -65,12 +66,13 @@ def details_view(request, name):
     days = 14
 
     # get Data from API
-    # data = get_location_datapoints(location=locationObj, days=days, startDay=startday)
-    data = {}
+    data = get_location_datapoints(location=locationObj, days=days, startDay=startday)
+    data.generate_labels()
 
     context = {
         "navbarSearch": True,
-        "data": data,
+        "data": json.dumps(data.to_dict()),
+        "location": locationObj.to_dict(),
     }
     return render(request, "pages/details.html", context)
 

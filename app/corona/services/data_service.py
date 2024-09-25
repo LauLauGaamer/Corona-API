@@ -86,6 +86,7 @@ def get_location_datapoints(location: LocationDTO, days: int | None = None, star
         endpoint_name = location.name,
         start_date = startDay,
         end_date = endDay,
+        labels = None,
         cases = cases,
         deaths = deaths,
         incidence = incidence,

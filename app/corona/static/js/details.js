@@ -6,10 +6,18 @@ window.onload = function() {
     initializeCharts();
 
     function initializeCharts() {
-        chartConfigs['chart-main'] = createLineChartConfig('Hauptmetrik', [12, 19, 3, 5, 2, 3])
-        chartConfigs['chart1'] = createLineChartConfig('Metrik 1', [10, 15, 5, 6, 8, 10])
-        chartConfigs['chart2'] = createLineChartConfig('Metrik 2', [6, 8, 12, 9, 10, 15])        
-        chartConfigs['chart3'] = createLineChartConfig('Metrik 3', [4, 5, 7, 8, 9, 6])
+        var scriptTag = document.getElementById('data-json');
+        var jsonData = scriptTag.textContent;
+        var parsedData = JSON.parse(jsonData);
+
+        // set start/end date
+        document.getElementById('start-date').value = parsedData['start_date']
+        document.getElementById('end-date').value = parsedData['end_date']
+
+        chartConfigs['chart-main'] = createLineChartConfig('Corona-Fälle', parsedData['cases'], false)
+        chartConfigs['chart1'] = createLineChartConfig('Genesen', parsedData['recovered'], true)
+        chartConfigs['chart2'] = createLineChartConfig('Inzidenz', parsedData['incidence'], true)        
+        chartConfigs['chart3'] = createLineChartConfig('Tode', parsedData['deaths'], true)
 
         charts['chart-main'] = new Chart(
             document.getElementById('chart-main').getContext('2d'),
@@ -29,11 +37,10 @@ window.onload = function() {
         );
     }
 
-    function createLineChartConfig(label, data) {
+    function createLineChartConfig(label, data, isSideChart) {
         return {
             type: 'line',
             data: {
-                labels: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni'],
                 datasets: [{
                     label: label,
                     data: data,
@@ -63,7 +70,9 @@ window.onload = function() {
                             color: 'white',
                             font: {
                                 size: 12
-                            }
+                            },
+                            autoSkip: true,
+                            maxTicksLimit: isSideChart ? 3 : 10
                         }
                     },
                     y: {
@@ -90,6 +99,9 @@ window.onload = function() {
             charts['chart' + String(chartId)].destroy();
             clearCanvas(chartId);
         }
+
+        chartConfigs[currentChartIDs[0]] = createLineChartConfig(chartConfigs[currentChartIDs[0]].data.datasets[0].label, chartConfigs[currentChartIDs[0]].data.datasets[0].data, true);
+        chartConfigs[currentChartIDs[chartId]] = createLineChartConfig(chartConfigs[currentChartIDs[chartId]].data.datasets[0].label, chartConfigs[currentChartIDs[chartId]].data.datasets[0].data, false);
 
         // Create new Charts
         charts['chart-main'] = new Chart(

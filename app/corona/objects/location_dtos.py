@@ -60,8 +60,26 @@ class DatapointsDTO:
     endpoint_name: str
     start_date: datetime.date
     end_date: datetime.date
+    labels: str | None
     cases: Dict[datetime.date, int | None]
     incidence: Dict[datetime.date, float | None]
     deaths: Dict[datetime.date, int | None]
     recovered: Dict[datetime.date, int | None]
     # evt. Age Group / Männer Frauen etc.
+
+    def to_dict(self):
+        return {
+            'endpoint_id': self.endpoint_id,
+            'endpoint_name': self.endpoint_name,
+            'start_date': self.start_date.isoformat(), 
+            'end_date': self.end_date.isoformat(),
+            'labels': self.labels,
+            'cases': {date.strftime('%d.%m.%Y'): value for date, value in self.cases.items()},
+            'incidence': {date.strftime('%d.%m.%Y'): value for date, value in self.incidence.items()},
+            'deaths': {date.strftime('%d.%m.%Y'): value for date, value in self.deaths.items()},
+            'recovered': {date.strftime('%d.%m.%Y'): value for date, value in self.recovered.items()}
+        }
+    
+    def generate_labels(self):
+        if self.cases is not None:
+            self.labels = [d.strftime('%d.%m.%Y') for d in self.cases.keys()]
