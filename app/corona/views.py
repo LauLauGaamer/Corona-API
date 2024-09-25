@@ -65,7 +65,8 @@ def details_view(request, name):
     days = 14
 
     # get Data from API
-    data = get_location_datapoints(location=locationObj, days=days, startDay=startday)
+    # data = get_location_datapoints(location=locationObj, days=days, startDay=startday)
+    data = {}
 
     context = {
         "navbarSearch": True,

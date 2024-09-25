@@ -11,7 +11,43 @@
     {% include "includes/navbar.html" %}
 {% endblock %}
 
-  
+<div class="container my-5">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card">
+          <div class="card-body main-chart">
+            <canvas id="chart-main"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 d-flex flex-column justify-content-between side-charts">
+        <div class="card side-chart" id="side-chart-1" onclick="moveToCenter(1)">
+            <div class="card-body">
+                <canvas id="chart1"></canvas>
+            </div>
+        </div>
+        <div class="card side-chart" id="side-chart-2" onclick="moveToCenter(2)">
+            <div class="card-body">
+                <canvas id="chart2"></canvas>
+            </div>
+        </div>
+        <div class="card side-chart" id="side-chart-3" onclick="moveToCenter(3)">
+            <div class="card-body">
+                <canvas id="chart3"></canvas>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+    <div class="row mt-4">
+        <div class="date-range col-md-6 mx-auto text-center ">
+                <input type="date" class="input-date-left" id="start-date" placeholder="Startdatum">
+                <input type="date" class="input-date-right" id="end-date" placeholder="Enddatum">
+                <button class="btn btn-primary" onclick="updateCharts()">Zeitraum aktualisieren</button>
+            </div>
+    </div>
+</div>
 
 {% endblock content %}
 

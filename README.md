@@ -14,6 +14,7 @@ Investierte Zeit:
     +3
     +3
     +3
+    +2
 
 Ideen:
     - Schauen ob alle Städte / Landkreise / Bundesländer immer nur einmal hinzugefügt werden. Ansonsten Umbauen, dass das der Fall ist.
