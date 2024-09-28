@@ -20,3 +20,18 @@ Investierte Zeit:
 
 Ideen:
     - Schauen ob alle Städte / Landkreise / Bundesländer immer nur einmal hinzugefügt werden. Ansonsten Umbauen, dass das der Fall ist.
+
+
+Was muss installiert werden:
+    - python 3.11.9
+    - Django vers 5.1.1
+    - requests
+
+MUSS sicher gestellt werden, dass man im Ordner App ist (Überordner von app & Corona) (Da wo die manage.py auch platziert ist)
+
+Vor 1. Start:
+    - python manage.py migrate
+    - python manage.py makemigrations
+
+Zum Start:
+    - python manage.py runserver
