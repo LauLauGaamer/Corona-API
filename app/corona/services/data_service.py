@@ -22,6 +22,13 @@ def get_location_data(location: LocationDTO, startDay: date, endDay: date, dataT
     url = location.get_api_url() + str(dataType)
     response = request_api(url)
 
+    # check for not available Dates
+    if startDay < datetime(2020, 1, 1).date():
+        startDay = datetime(2020, 1, 1).date()
+
+    if endDay > datetime.now().date():
+        endDay = datetime.now().date()
+
     # extract data from response
     id_string = str(location.api_id)
     if len(id_string) == 4:
@@ -42,32 +49,6 @@ def get_location_data(location: LocationDTO, startDay: date, endDay: date, dataT
         dataDay = datetime.strptime(dataPoint["date"], "%Y-%m-%dT%H:%M:%S.%fZ").date()
         if startDay <= dataDay <= endDay:
             dataPoints[dataDay] = dataPoint[dataKey]
-
-    # startDay starts before record of Data
-    if not startDay in dataPoints.keys():
-        minDay = min(dataPoints.keys())
-
-        while startDay != minDay:
-            dataPoints[startDay] = None
-            startDay + timedelta(days=1)
-
-    # Endday is in the future / data record has stopped
-    if not endDay in dataPoints.keys():
-        day = max(dataPoints.keys()) + timedelta(days=1)
-
-        while day != endDay:
-            dataPoints[day] = None
-            day += timedelta(days=1)
-
-    # Removed, because of performance issues (maybe add to Tests later)
-    # day = startDay
-    # while day != (endDay + timedelta(days=1)):
-    #     print(day)
-    #     if day in dataPoints.keys():
-    #         day += timedelta(days=1)
-    #         continue
-
-    #     raise MissingDataPointError(start_day=startDay, end_day=endDay, missing_day=day)
         
     return dataPoints
     
