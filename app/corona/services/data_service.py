@@ -71,8 +71,7 @@ def get_location_data(location: LocationDTO, startDay: date, endDay: date, dataT
         
     return dataPoints
     
-def get_location_datapoints(location: LocationDTO, days: int | None = None, startDay: date | None = None) -> DatapointsDTO:
-    endDay = startDay + timedelta(days=days)
+def get_location_datapoints(location: LocationDTO, startDay: date | None = None, endDay: date | None = None) -> DatapointsDTO:
 
     # get all data
     cases = get_location_data(location=location, startDay=startDay, endDay=endDay, dataType=APIDataTypeEnum.CASES)
@@ -84,6 +83,7 @@ def get_location_datapoints(location: LocationDTO, days: int | None = None, star
     locationDatapoints = DatapointsDTO(
         endpoint_id = location.id,
         endpoint_name = location.name,
+        endpoint_type = location.type,
         start_date = startDay,
         end_date = endDay,
         labels = None,

@@ -52,6 +52,9 @@ def search_view(request):
 
 def details_view(request, name):
     locationType = request.GET.get("type", "").lower().strip()
+    endDay = request.GET.get("end", "").lower().strip()
+    startDay = request.GET.get("start", "").lower().strip()
+    dateNotReadable = False
 
     try:
         typeEnum = LocationTypeEnum.from_string(locationType)
@@ -60,19 +63,41 @@ def details_view(request, name):
     
     # get Database entry
     locationObj = get_location(typeEnum, query=name)
-    
-    # Datum aus Frontend holen und ANPASSEN!
-    startday = datetime.now().date() - timedelta(days=20)
-    days = 14
+
+    # get dates from URL
+    if startDay == "":
+        startDay = datetime.now().date() - timedelta(days=14)
+    else:
+        try:
+            startDay = datetime.strptime(startDay, '%Y-%m-%d').date()
+        except:
+            startDay = datetime.now().date() - timedelta(days=14)
+            dateNotReadable = True
+
+    if endDay == "":
+        endDay = startDay + timedelta(days=14)
+    else:
+        try:
+            endDay = datetime.strptime(endDay, '%Y-%m-%d').date()
+        except:
+            endDay = startDay + timedelta(days=14)
+            dateNotReadable = True
 
     # get Data from API
-    data = get_location_datapoints(location=locationObj, days=days, startDay=startday)
+    data = get_location_datapoints(location=locationObj, startDay=startDay, endDay=endDay)
     data.generate_labels()
+
+    # Add District to location if its a Town (for reference in frontend)
+    location = locationObj.to_dict()
+
+    if locationObj.type == LocationTypeEnum.TOWN:
+        location["district"] = get_location(LocationTypeEnum.DISTRICT, locationObj.district).name
 
     context = {
         "navbarSearch": True,
         "data": json.dumps(data.to_dict()),
-        "location": locationObj.to_dict(),
+        "location": location,
+        "dateNotReadable": dateNotReadable,
     }
     return render(request, "pages/details.html", context)
 

@@ -1,14 +1,24 @@
 let currentChartIDs = ['chart-main', 'chart1', 'chart2', 'chart3'];
 let chartConfigs = {}
 let charts = {};
+let parsedData
 
 window.onload = function() {
     initializeCharts();
 
+    document.getElementById('date-update').addEventListener('click', function() {
+        console.log("hhhhhh");
+        var start = document.getElementById('start-date').value
+        var end = document.getElementById('end-date').value
+    
+        window.location.href = `${window.location.origin}/corona/details/${parsedData["endpoint_id"]}?type=${parsedData["endpoint_type"]}&start=${start}&end=${end}` 
+    });
+
     function initializeCharts() {
         var scriptTag = document.getElementById('data-json');
         var jsonData = scriptTag.textContent;
-        var parsedData = JSON.parse(jsonData);
+        parsedData = JSON.parse(jsonData);
+        console.log(parsedData)
 
         // set start/end date
         document.getElementById('start-date').value = parsedData['start_date']
@@ -72,7 +82,7 @@ window.onload = function() {
                                 size: 12
                             },
                             autoSkip: true,
-                            maxTicksLimit: isSideChart ? 3 : 10
+                            maxTicksLimit: isSideChart ? 2 : 8
                         }
                     },
                     y: {
@@ -138,5 +148,3 @@ window.onload = function() {
         }
     }
 };
-
-function updateCharts(){}

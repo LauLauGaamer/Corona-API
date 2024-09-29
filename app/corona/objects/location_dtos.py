@@ -58,6 +58,7 @@ class TownDTO(LocationDTO):
 class DatapointsDTO:
     endpoint_id: int | str
     endpoint_name: str
+    endpoint_type: LocationTypeEnum
     start_date: datetime.date
     end_date: datetime.date
     labels: str | None
@@ -71,6 +72,7 @@ class DatapointsDTO:
         return {
             'endpoint_id': self.endpoint_id,
             'endpoint_name': self.endpoint_name,
+            'endpoint_type': str(self.endpoint_type),
             'start_date': self.start_date.isoformat(), 
             'end_date': self.end_date.isoformat(),
             'labels': self.labels,
