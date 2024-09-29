@@ -1,0 +1,16 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{% block navbar %}
+    {% include "includes/navbar.html" %}
+{% endblock %}
+
+<h1>500 - Interner Server Fehler.</h1>
+<a class="btn btn-primary" href="{% url 'home' %}">zurück zur Homepage</a>
+
+{% endblock content %}

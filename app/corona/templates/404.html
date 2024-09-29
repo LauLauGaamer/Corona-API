@@ -1,0 +1,16 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{% block navbar %}
+    {% include "includes/navbar.html" %}
+{% endblock %}
+
+<h1>404 - Die angefragte seite wurde nicht gefunden.</h1> <br>
+<a class="btn btn-primary" href="{% url 'home' %}">zurück zur Homepage</a> 
+
+{% endblock content %}
