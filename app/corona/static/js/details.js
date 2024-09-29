@@ -21,8 +21,19 @@ window.onload = function() {
         console.log(parsedData)
 
         // set start/end date
-        document.getElementById('start-date').value = parsedData['start_date']
-        document.getElementById('end-date').value = parsedData['end_date']
+        var date = new Date()
+        var today = date.toISOString().slice(0, -14)
+
+        startDate = document.getElementById('start-date')
+        endDate = document.getElementById('end-date')
+
+        startDate.value = parsedData['start_date']
+        startDate.min = "2019-12-31"
+        startDate.max = today
+
+        endDate.value = parsedData['end_date']
+        endDate.min = "2019-12-31"
+        endDate.max = today
 
         chartConfigs['chart-main'] = createLineChartConfig('Corona-Fälle', parsedData['cases'], false)
         chartConfigs['chart1'] = createLineChartConfig('Genesen', parsedData['recovered'], true)
@@ -57,7 +68,7 @@ window.onload = function() {
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderWidth: 2,
-                    tension: 0.1
+                    tension: 0.1,
                 }]
             },
             options: {

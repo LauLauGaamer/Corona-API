@@ -48,6 +48,7 @@ canvas {
     color: #fff;
     display: flex;
     align-items: center;
+    margin-left: 20px;
 }
 
 .chartjs-render-monitor {
