@@ -69,6 +69,7 @@ window.onload = function() {
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderWidth: 2,
                     tension: 0.1,
+                    pointRadius: 0,
                 }]
             },
             options: {
