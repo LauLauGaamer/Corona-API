@@ -17,7 +17,7 @@ def request_api(url: str) -> requests.Response:
 def read_file_lines(url: str = base_dir / 'corona/static/files/Liste-Staedte-in-Deutschland.csv') -> List[str]:
     with open(url, 'r', encoding = 'utf-8') as file:
         return file.readlines()
-    
+# Datei: corona/services/data_service.py:21-22   
 def get_location_data(location: LocationDTO, startDay: date, endDay: date, dataType: APIDataTypeEnum) -> Dict[date, int | float | None]:
     url = location.get_api_url() + str(dataType)
     response = request_api(url)

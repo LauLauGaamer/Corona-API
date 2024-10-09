@@ -124,7 +124,12 @@ def live_search(request):
             }
 
         except TooManyResultsError as e:
-            results = {"towns": [x.to_dict() for x in e.results["towns"][:3]], "districts":  [x.to_dict() for x in e.results["districts"][:3]], "states":  [x.to_dict() for x in e.results["states"][:3]], "querySucceeded": False,}
+            results = {
+                "towns": [x.to_dict() for x in e.results["towns"][:3]], 
+                "districts":  [x.to_dict() for x in e.results["districts"][:3]], 
+                "states":  [x.to_dict() for x in e.results["states"][:3]], 
+                "querySucceeded": False,
+            }
     else:
         results = {"towns": [], "districts": [], "states": [], "querySucceeded": True}
 
