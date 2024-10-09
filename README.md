@@ -50,7 +50,8 @@ cd app
 python manage.py runserver
 ```
 
-Zur Vereinfachung des Startens wurde jedoch auch eine ausführbare [Batch-Datei (start-server.bat)](start-server.bat) hinzugefügt.
+Zur Vereinfachung des Startens wurde jedoch auch eine ausführbare [Batch-Datei (start-server.bat)](start-server.bat) hinzugefügt.<br>
+Der Server kann unter folgender [Adresse](http://127.0.0.1:8000/corona) erreicht werden
 
 ## Wichtige Hinweise
 
