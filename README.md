@@ -1,5 +1,5 @@
 # Corona-API
-DD2 Project - Lauryn Dube
+DD2 Project - Lauryn Dube<br>
 Investierte Zeit: ~ 22h (Programmierung)
 
 Github-Projekt: https://github.com/LauLauGaamer/Corona-API 
@@ -19,6 +19,7 @@ Github-Projekt: https://github.com/LauLauGaamer/Corona-API
 **Wichtig! Es ist empfehlenswert für die Installation der Anwendung zuvor ein virtuelles Environment anzulegen und diese zu nutzen!**
 Die Installation ist manuell oder mithilfe der [Batch Datei (installation.bat)](installation.bat) möglich. Zur Installation einfach die [Batch Datei](installation.bat) ausführen oder folgende Schritte manuell durchführen.
 
+## Manuelle Installation (ohne Batch-Datei)
 ### 1. Installieren der Python Bibliotheken
 
 Um die genutzten Python Bibliotheken zu installieren ist es empfehlenswert die mitgelieferte [Requirements.txt](requirements.txt) zu verwenden. Zur Installation kann folgender Befehl genutzt werden:
