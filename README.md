@@ -2,6 +2,7 @@
 DD2 Project - Lauryn Dube<br>
 Investierte Zeit: ~ 22h (Programmierung)
 
+E-Mail für Rückfragen: lauryndube1@gmail.com
 Github-Projekt: https://github.com/LauLauGaamer/Corona-API 
 
 ## Voraussetzungen
